@@ -1,0 +1,33 @@
+apiVersion: kaptain.org/1.13
+kind: kubernetes-app-manifests-only
+
+spec:
+  global:
+    projectName:
+      stripRepositoryNamePrefix: test
+    tokens:
+      delimiterStyle: github-actions
+      allowBuiltinOverride: true
+  main:
+    externalImage:
+      name: kaptain-test-repos/test-kube-app-docker
+      tag: latest
+    generators:
+      workload:
+        type: cronjob
+        container:
+          port: 8080
+      cronjob:
+        concurrencyPolicy: Forbid
+        startingDeadlineSeconds: 60
+        successfulJobsHistoryLimit: 3
+        failedJobsHistoryLimit: 1
+        backoffLimit: 3
+        restartPolicy: OnFailure
+    hooks:
+      preBuild: test-hooks/pre-build.bash
+      preTaggingTests: test-hooks/pre-tagging-tests.bash
+      postVersionsAndNaming: test-hooks/post-versions-and-naming.bash
+      prePackagePrepare: test-hooks/pre-package-prepare.bash
+      postPackageTests: test-hooks/post-package-tests.bash
+      postBuild: test-hooks/post-build.bash
