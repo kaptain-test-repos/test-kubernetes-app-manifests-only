@@ -1,0 +1,2 @@
+Welcome to ${{ ProjectName }} running in ${{ Environment }} at version ${{ Version }}.
+Contact ${{ SupportEmail }} for help.

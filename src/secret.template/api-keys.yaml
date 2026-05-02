@@ -1,0 +1,2 @@
+external-api-key: ${{ ExternalApiKey }}
+webhook-signing-secret: ${{ WebhookSigningSecret }}

@@ -1,0 +1,4 @@
+log-level: info
+external-api-url: ${{ ExternalApiUrl }}
+feature-flag-name: ${{ FeatureFlagName }}
+environment: ${{ Environment }}
